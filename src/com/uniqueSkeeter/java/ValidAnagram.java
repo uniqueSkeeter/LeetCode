@@ -1,4 +1,7 @@
 package com.uniqueSkeeter.java;
+
+import java.util.Arrays;
+
 //判断两个单词是否为易位构词
 /*
  Given two strings s and t, write a function to determine if t is an anagram of s.
@@ -10,6 +13,11 @@ s = "rat", t = "car", return false.
 Note:
 You may assume the string contains only lowercase alphabets.
  */
+//思路1 先排序再比较字符串
+//思路2 比较字符数量
+//字符串与字符数组的互换
+//字符串变为字符数组 toCharArray
+//字符数组变为字符串 String.valueOf
 public class ValidAnagram {
 
 	public static void main(String[] args) {
@@ -26,32 +34,11 @@ public class ValidAnagram {
 		if(s.length() != t.length())
 			return false;
 		if(s.length()==0 || t.length()==0)
-			return false;
+			return true;
 		char [] sArray = s.toCharArray();
 		char [] tArray = t.toCharArray();
-		int charNum = s.length();
-		//辅助数组
-		boolean [] useTag = new boolean[charNum];
-		//辅助数组初始化
-		for(int i=0;i<charNum;i++){
-			useTag[i]=false;
-		}
-		char ch;
-		int i,j,getNum=0;
-		for(i=0;i<charNum;i++){
-			ch = sArray[i];
-			for(j=0;j<charNum;j++){
-				//找到
-				if(tArray[j] == ch && useTag[j] == false){
-					useTag[j] = true;
-					getNum++;
-					break;
-				}
-			}
-		}
-		if(getNum == charNum)
-			return true;
-		else
-			return false;
+		Arrays.sort(sArray);
+		Arrays.sort(tArray);
+		return String.valueOf(sArray).equals(String.valueOf(tArray));
     }
 }
